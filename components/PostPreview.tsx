@@ -14,26 +14,24 @@ export default function PostPreview({
 }: Omit<Post, '_id'>) {
   return (
     <div>
-      <div className="mb-5">
-        <CoverImage
-          slug={slug}
-          title={title}
-          image={coverImage}
-          priority={false}
-        />
+      <div className="mb-5 relative group">
+        <div className="relative">
+          <CoverImage
+            slug={slug}
+            title={title}
+            image={coverImage}
+            priority={false}
+          />
+        </div>
+        <div className='absolute pointer-events-none inset-0 bg-gradient-to-b from-transparent to-black/60 opacity-0 transition-opacity duration-300 group-hover:opacity-100'></div>
+        <div className='absolute bottom-4 left-4 right-4 opacity-0 transform translate-y-2 transition-all duration-300 group-hover:opacity-100 group-hover:translate-y-0'>
+          <h3 className="text-3xl leading-snug text-balance text-white">
+            <Link href={`/posts/${slug}`}>
+              {title}
+            </Link>
+          </h3>
+        </div>
       </div>
-      <h3 className="mb-3 text-3xl leading-snug text-balance">
-        <Link href={`/posts/${slug}`} className="hover:underline">
-          {title}
-        </Link>
-      </h3>
-      <div className="mb-4 text-lg">
-        <Date dateString={date} />
-      </div>
-      {excerpt && (
-        <p className="mb-4 text-lg leading-relaxed text-pretty">{excerpt}</p>
-      )}
-      {author && <Avatar name={author.name} picture={author.picture} />}
     </div>
   )
 }

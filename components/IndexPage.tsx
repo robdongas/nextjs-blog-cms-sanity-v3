@@ -4,10 +4,8 @@ import Layout from 'components/BlogLayout'
 import HeroPost from 'components/HeroPost'
 import IndexPageHead from 'components/IndexPageHead'
 import MoreStories from 'components/MoreStories'
-import IntroTemplate from 'intro-template'
 import * as demo from 'lib/demo.data'
 import type { Post, Settings } from 'lib/sanity.queries'
-import { Suspense } from 'react'
 
 export interface IndexPageProps {
   preview?: boolean
@@ -28,7 +26,7 @@ export default function IndexPage(props: IndexPageProps) {
       <Layout preview={preview} loading={loading}>
         <Container>
           <BlogHeader title={title} description={description} level={1} />
-          {heroPost && (
+          {/* {heroPost && (
             <HeroPost
               title={heroPost.title}
               coverImage={heroPost.coverImage}
@@ -37,12 +35,9 @@ export default function IndexPage(props: IndexPageProps) {
               slug={heroPost.slug}
               excerpt={heroPost.excerpt}
             />
-          )}
-          {morePosts.length > 0 && <MoreStories posts={morePosts} />}
+          )} */}
+          {posts.length > 0 && <MoreStories posts={posts} level={1} />}
         </Container>
-        <Suspense>
-          <IntroTemplate />
-        </Suspense>
       </Layout>
     </>
   )

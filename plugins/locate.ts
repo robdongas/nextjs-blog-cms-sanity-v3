@@ -41,30 +41,5 @@ export const locate: DocumentLocationResolver = (params, context) => {
     )
   }
 
-  if (params.type === 'author') {
-    // Fetch all posts that reference the viewed author, if the post has a slug defined
-    const doc$ = context.documentStore.listenQuery(
-      `*[_type == "post" && references($id) && defined(slug.current)]{slug,title}`,
-      params,
-      { perspective: 'drafts' },
-    ) as Observable<
-      {
-        slug: { current: string }
-        title: string | null
-      }[]
-    >
-
-    return doc$.pipe(
-      map((docs) => {
-        return {
-          locations: docs?.map((doc) => ({
-            title: doc?.title || 'Untitled',
-            href: `/posts/${doc?.slug?.current}`,
-          })),
-        }
-      }),
-    )
-  }
-
   return null
 }

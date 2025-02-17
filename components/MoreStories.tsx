@@ -13,7 +13,6 @@ export default function MoreStories({ posts, level }: { posts: Post[], level: 1 
                   title={post.title}
                   coverImage={post.coverImage}
                   date={post.date}
-                  author={post.author}
                   slug={post.slug}
                   excerpt={post.excerpt}
                 />
@@ -35,7 +34,6 @@ export default function MoreStories({ posts, level }: { posts: Post[], level: 1 
                   title={post.title}
                   coverImage={post.coverImage}
                   date={post.date}
-                  author={post.author}
                   slug={post.slug}
                   excerpt={post.excerpt}
                 />

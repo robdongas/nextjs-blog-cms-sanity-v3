@@ -1,4 +1,3 @@
-import AuthorAvatar from 'components/AuthorAvatar'
 import CoverImage from 'components/CoverImage'
 import Date from 'components/PostDate'
 import type { Post } from 'lib/sanity.queries'
@@ -7,10 +6,10 @@ import Link from 'next/link'
 export default function HeroPost(
   props: Pick<
     Post,
-    'title' | 'coverImage' | 'date' | 'excerpt' | 'author' | 'slug'
+    'title' | 'coverImage' | 'date' | 'excerpt' | 'slug'
   >,
 ) {
-  const { title, coverImage, date, excerpt, author, slug } = props
+  const { title, coverImage, date, excerpt, slug } = props
   return (
     <section>
       <div className="mb-8 md:mb-16 relative group">
@@ -36,9 +35,6 @@ export default function HeroPost(
             <p className="mb-4 text-lg leading-relaxed text-pretty">
               {excerpt}
             </p>
-          )}
-          {author && (
-            <AuthorAvatar name={author.name} picture={author.picture} />
           )}
         </div>
       </div> */}

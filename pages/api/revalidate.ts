@@ -1,5 +1,5 @@
 /**
- * This code is responsible for revalidating the cache when a post or author is updated.
+ * This code is responsible for revalidating the cache when a post is updated.
  *
  * It is set up to receive a validated GROQ-powered Webhook from Sanity.io:
  * https://www.sanity.io/docs/webhooks
@@ -9,7 +9,7 @@
  * 3. Set the URL to https://YOUR_NEXTJS_SITE_URL/api/revalidate
  * 4. Dataset: Choose desired dataset or leave at default "all datasets"
  * 5. Trigger on: "Create", "Update", and "Delete"
- * 6. Filter: _type == "post" || _type == "author" || _type == "settings"
+ * 6. Filter: _type == "post" || _type == "settings"
  * 7. Projection: Leave empty
  * 8. Status: Enable webhook
  * 9. HTTP method: POST
@@ -152,8 +152,6 @@ async function queryStaleRoutes(
   }
 
   switch (body._type) {
-    case 'author':
-      return await queryStaleAuthorRoutes(client, body._id)
     case 'post':
       return await queryStalePostRoutes(client, body._id)
     case 'settings':
@@ -186,25 +184,6 @@ async function mergeWithMoreStories(
   }
 
   return slugs
-}
-
-async function queryStaleAuthorRoutes(
-  client: SanityClient,
-  id: string,
-): Promise<StaleRoute[]> {
-  let slugs = await client.fetch(
-    groq`*[_type == "author" && _id == $id] {
-    "slug": *[_type == "post" && references(^._id)].slug.current
-  }["slug"][]`,
-    { id },
-  )
-
-  if (slugs.length > 0) {
-    slugs = await mergeWithMoreStories(client, slugs)
-    return ['/', ...slugs.map((slug) => `/posts/${slug}`)]
-  }
-
-  return []
 }
 
 async function queryStalePostRoutes(

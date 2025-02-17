@@ -4,6 +4,7 @@
  */
 
 import { visionTool } from '@sanity/vision'
+import {assist} from '@sanity/assist'
 import {
   apiVersion,
   dataset,
@@ -54,5 +55,6 @@ export default defineConfig({
     // https://www.sanity.io/docs/the-vision-plugin
     process.env.NODE_ENV !== 'production' &&
       visionTool({ defaultApiVersion: apiVersion }),
+    assist()
   ],
 })

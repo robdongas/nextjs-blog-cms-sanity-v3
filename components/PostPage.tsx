@@ -31,6 +31,8 @@ export default function PostPage(props: PostPageProps) {
     return <Error statusCode={404} />
   }
 
+  console.log(post)
+
   return (
     <>
       <PostPageHead settings={settings} post={post} />
@@ -46,6 +48,7 @@ export default function PostPage(props: PostPageProps) {
                 <PostHeader
                   title={post.title}
                   coverImage={post.coverImage}
+                  coverHidden={post.coverHidden}
                   date={post.date}
                 />
                 <PostBody content={post.content} />

@@ -78,6 +78,13 @@ export default defineType({
       },
     }),
     defineField({
+      name: 'coverHidden',
+      title: 'Hide Cover on Post',
+      type: 'boolean',
+      initialValue: false,
+      description: 'Determines whether the cover image is hidden on the post page'
+    }),
+    defineField({
       name: 'date',
       title: 'Date',
       type: 'datetime',

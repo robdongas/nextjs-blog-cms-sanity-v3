@@ -5,13 +5,15 @@ import Link from 'next/link'
 
 export default function PostPreview({
   title,
+  projectType,
   coverImage,
+  coverHidden,
   date,
   excerpt,
   slug,
 }: Omit<Post, '_id'>) {
   return (
-    <div>
+    <div {...{ "project-type": `${projectType}` }}>
       <div className="mb-5 relative group">
         <div className="relative">
           <CoverImage

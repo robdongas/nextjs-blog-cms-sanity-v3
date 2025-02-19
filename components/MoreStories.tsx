@@ -11,7 +11,9 @@ export default function MoreStories({ posts, level }: { posts: Post[], level: 1 
               <div key={post._id} className="break-inside-avoid inline-block w-full mb-4">
                 <PostPreview
                   title={post.title}
+                  projectType={post.projectType}
                   coverImage={post.coverImage}
+                  coverHidden={post.coverHidden}
                   date={post.date}
                   slug={post.slug}
                   excerpt={post.excerpt}
@@ -32,7 +34,9 @@ export default function MoreStories({ posts, level }: { posts: Post[], level: 1 
               <div key={post._id} className="break-inside-avoid inline-block w-full mb-4">
                 <PostPreview
                   title={post.title}
+                  projectType={post.projectType}
                   coverImage={post.coverImage}
+                  coverHidden={post.coverHidden}
                   date={post.date}
                   slug={post.slug}
                   excerpt={post.excerpt}

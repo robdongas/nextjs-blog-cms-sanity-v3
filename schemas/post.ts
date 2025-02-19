@@ -1,5 +1,6 @@
 import { BookIcon } from '@sanity/icons'
 import { format, parseISO } from 'date-fns'
+import { rule } from 'postcss'
 import { defineField, defineType } from 'sanity'
 /**
  * This file is the schema definition for a post.
@@ -33,6 +34,18 @@ export default defineType({
         source: 'title',
         maxLength: 96,
         isUnique: (value, context) => context.defaultIsUnique(value, context),
+      },
+      validation: (rule) => rule.required(),
+    }),
+    defineField({
+      name: 'projectType',
+      title: 'Project Type',
+      type: 'string',
+      options: {
+        list: [
+          { title: 'Brand', value: 'brand' },
+          { title: 'Art', value: 'art' }
+        ],
       },
       validation: (rule) => rule.required(),
     }),

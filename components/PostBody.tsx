@@ -9,17 +9,36 @@
  */
 import { PortableText, type PortableTextReactComponents } from 'next-sanity'
 
-import { SanityImage } from './SanityImage'
+import React, { useEffect } from 'react';
+import PhotoSwipeLightbox from 'photoswipe/lightbox';
+import 'photoswipe/style.css';
+
+import { SanityImageLightbox } from './SanityImageLightbox'
 
 const myPortableTextComponents: Partial<PortableTextReactComponents> = {
   types: {
     image: ({ value }) => {
-      return <SanityImage {...value} />
+      return (
+        <SanityImageLightbox {...value} />
+      );
     },
   },
 }
 
 export default function PostBody({ content }) {
+  useEffect(() => {
+    let lightbox = new PhotoSwipeLightbox({
+      gallery: '.prose',
+      children: 'a[data-pswp-width]',
+      pswpModule: () => import('photoswipe'),
+    });
+    lightbox.init();
+
+    return () => {
+      lightbox.destroy();
+      lightbox = null;
+    };
+  }, []);
   return (
     <div className="mx-auto max-w-2xl prose">
       <PortableText value={content} components={myPortableTextComponents} />

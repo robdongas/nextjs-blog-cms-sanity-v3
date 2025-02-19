@@ -15,6 +15,7 @@
     "singleQuote": true
   },
   "dependencies": {
+    "@gsap/react": "^2.1.2",
     "@sanity/assist": "^3.1.1",
     "@sanity/client": "6.28.0",
     "@sanity/icons": "3.5.7",
@@ -31,6 +32,7 @@
     "next": "15.1.7",
     "next-sanity": "9.8.57",
     "next-sanity-image": "6.1.1",
+    "photoswipe": "^5.4.4",
     "react": "19.0.0",
     "react-dom": "19.0.0",
     "sanity": "3.75.0",

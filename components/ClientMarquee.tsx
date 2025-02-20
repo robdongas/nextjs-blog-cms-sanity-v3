@@ -60,7 +60,7 @@ export default function ClientMarquee({ clients }: ClientMarqueeProps) {
     return (
         <section>
             <div className="container mx-auto mb-10 ps-5 text-pretty">
-                <h2 className="text-3xl font-bold leading-tight tracking-tighter md:pr-8 md:text-5xl">Clients</h2>
+                <h2 className="mb-8 text-6xl font-bold leading-tight tracking-tighter md:text-7xl">Clients</h2>
             </div>
 
             <div className="w-full py-8 overflow-hidden relative">
@@ -74,7 +74,7 @@ export default function ClientMarquee({ clients }: ClientMarqueeProps) {
                             <a
                                 key={index}
                                 href={client.url}
-                                className="text-2xl font-light tracking-wider flex-none text-center hover:font-medium transition-all  hover:underline"
+                                className="text-4xl font-light tracking-wider flex-none text-center hover:font-medium transition-all hover:underline"
                                 style={{ margin: '0 3rem' }} // Using inline style for precise spacing
                             >
                                 {client.name}

@@ -59,7 +59,7 @@ export default function MoreStories({ posts, level }: { posts: Post[], level: 1 
     case 1:
       return (
         <section>
-          <div ref={postsRef} className="mb-32 columns-1 gap-8 [column-fill:_balance] md:columns-2 lg:columns-3">
+          <div ref={postsRef} className="mb-8 columns-1 gap-8 [column-fill:_balance] md:columns-2 lg:columns-3">
             {posts.map((post, index) => (
               <div key={post._id} className="break-inside-avoid inline-block w-full mb-4">
                 <PostPreview

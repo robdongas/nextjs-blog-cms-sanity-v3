@@ -59,11 +59,11 @@ export default function ClientMarquee({ clients }: ClientMarqueeProps) {
 
     return (
         <section>
-            <div className="container mx-auto mb-10 ps-5 text-pretty">
+            <div className="container mx-auto mb-8 ps-5 text-pretty">
                 <h2 className="mb-8 text-6xl font-bold leading-tight tracking-tighter md:text-7xl">Clients</h2>
             </div>
 
-            <div className="w-full py-8 overflow-hidden relative">
+            <div className="w-full py-8 overflow-hidden relative mb-8">
                 {/* Edge fade gradients */}
                 <div className="absolute left-0 top-0 w-32 h-full bg-gradient-to-r from-white to-transparent z-10"></div>
                 <div className="absolute right-0 top-0 w-32 h-full bg-gradient-to-l from-white to-transparent z-10"></div>

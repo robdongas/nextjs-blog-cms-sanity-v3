@@ -9,6 +9,7 @@ import * as demo from 'lib/demo.data'
 import type { Post, Settings } from 'lib/sanity.queries'
 import { useState, useEffect } from 'react'
 import ClientMarquee from './ClientMarquee'
+import Contact from './Contact'
 
 export interface IndexPageProps {
   preview?: boolean
@@ -71,6 +72,7 @@ export default function IndexPage(props: IndexPageProps) {
           </div>
         </Container>
         <ClientMarquee clients={clients} />
+        <Contact/>
       </Layout>
     </>
   )

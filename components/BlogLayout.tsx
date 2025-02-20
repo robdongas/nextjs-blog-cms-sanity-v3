@@ -1,4 +1,5 @@
 import AlertBanner from 'components/AlertBanner'
+import CursorFollower from './CursorFollower'
 
 export default function BlogLayout({
   preview,
@@ -14,6 +15,7 @@ export default function BlogLayout({
       <div className="min-h-screen">
         <AlertBanner preview={preview} loading={loading} />
         <main>{children}</main>
+        <CursorFollower />
       </div>
     </>
   )

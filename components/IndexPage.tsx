@@ -8,6 +8,7 @@ import MoreStories from 'components/MoreStories'
 import * as demo from 'lib/demo.data'
 import type { Post, Settings } from 'lib/sanity.queries'
 import { useState, useEffect } from 'react'
+import ClientMarquee from './ClientMarquee'
 
 export interface IndexPageProps {
   preview?: boolean
@@ -37,6 +38,17 @@ export default function IndexPage(props: IndexPageProps) {
     }, 300)
   }
 
+  const clients = [
+    { name: 'Adobe', url: 'https://www.behance.net/gallery/83588137/Adobe-Pawtraits' },
+    { name: 'Coca Cola', url: 'https://www.behance.net/gallery/132173859/Frozen-Coke' },
+    { name: 'Coles', url: 'https://www.coles.com.au' },
+    { name: 'Culture Amp', url: 'https://www.behance.net/gallery/125479807/Culture-Amp-Identity' },
+    // { name: 'The Infectious Diseases Society of America', url: 'https://www.idsociety.org' },
+    { name: 'Sydney Dogs & Cats Home', url: 'https://www.sydneydogsandcatshome.org' },
+    { name: 'Story Cafe', url: 'https://www.forthepeople.agency/story-cafe' },
+    { name: 'Womens\' & Girls Emergency Centre', url: 'https://www.wagec.org.au' },
+  ]
+
   return (
     <>
       <IndexPageHead settings={settings} />
@@ -58,6 +70,7 @@ export default function IndexPage(props: IndexPageProps) {
             {posts.length > 0 && <MoreStories posts={filteredPosts} level={1} />}
           </div>
         </Container>
+        <ClientMarquee clients={clients} />
       </Layout>
     </>
   )

@@ -1,5 +1,6 @@
 import AlertBanner from 'components/AlertBanner'
 import CursorFollower from './CursorFollower'
+import Contact from './Contact'
 
 export default function BlogLayout({
   preview,
@@ -16,6 +17,7 @@ export default function BlogLayout({
         <AlertBanner preview={preview} loading={loading} />
         <main>{children}</main>
         <CursorFollower />
+        <Contact/>
       </div>
     </>
   )

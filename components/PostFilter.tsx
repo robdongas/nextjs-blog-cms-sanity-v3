@@ -30,7 +30,7 @@ export default function PostFilter({ onFilterChange }: PostFilterProps) {
             onClick={() => handleFilterClick(filter)}
             className={`
               text-xl transition-all duration-300 text-center
-              hover:font-bold
+              hover:font-bold hover:cursor-pointer
               ${
                 activeFilter === filter
                   ? 'font-bold tracking-[0.6em] mr-[-0.6em]'

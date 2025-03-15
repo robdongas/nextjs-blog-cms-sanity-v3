@@ -12,15 +12,16 @@ interface CoverImageProps {
 
 export default function CoverImage(props: CoverImageProps) {
   const { title, slug, image: source, priority } = props
+  console.log(source)
   const image = source?.asset?._ref ? (
-    <div>
+    <div className='relative'>
       <Image
         className="h-auto w-full"
         width={source.dimensions?.width || 2000}
         height={source.dimensions?.height || 1000}
         alt=""
         src={urlForImage(source).url()}
-        sizes="100vw"
+        sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
         priority={priority}
       />
     </div>

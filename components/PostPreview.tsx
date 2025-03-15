@@ -20,7 +20,7 @@ export default function PostPreview({
             slug={slug}
             title={title}
             image={coverImage}
-            priority={false}
+            priority={true}
           />
         </div>
         <div className='absolute pointer-events-none inset-0 bg-gradient-to-b from-transparent to-black/60 opacity-0 transition-opacity duration-300 group-hover:opacity-100'></div>

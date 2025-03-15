@@ -74,7 +74,7 @@ export default function ClientMarquee({ clients }: ClientMarqueeProps) {
                             <a
                                 key={index}
                                 href={client.url}
-                                className="text-4xl font-light tracking-wider flex-none text-center hover:font-medium transition-all hover:underline"
+                                className="text-2xl font-light tracking-wider flex-none text-center hover:font-medium transition-all hover:underline md:text-4xl"
                                 style={{ margin: '0 3rem' }} // Using inline style for precise spacing
                             >
                                 {client.name}

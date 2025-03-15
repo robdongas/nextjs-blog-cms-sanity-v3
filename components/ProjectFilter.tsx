@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { Fragment, useState } from 'react'
 
 type DisplayFilter = 'ALL' | 'BRAND' | 'PERSONAL'
 type ProjectType = 'brand' | 'art'
@@ -24,9 +24,8 @@ export default function ProjectFilter({ onFilterChange }: ProjectFilterProps) {
   return (
     <div className="flex justify-center items-center gap-4 my-16">
       {(Object.keys(filterMap) as DisplayFilter[]).map((filter, index) => (
-        <>
+        <Fragment key={filter}>
           <button
-            key={filter}
             onClick={() => handleFilterClick(filter)}
             className={`
               text-xl transition-all duration-300 text-center
@@ -41,9 +40,9 @@ export default function ProjectFilter({ onFilterChange }: ProjectFilterProps) {
             {filter}
           </button>
           {index < Object.keys(filterMap).length - 1 && (
-            <span key={`${filter}-sep`} className="text-gray-400 text-xl">|</span>
+            <span className="text-gray-400 text-xl">|</span>
           )}
-        </>
+        </Fragment>
       ))}
     </div>
   )

@@ -35,7 +35,6 @@ export default function App({
     }
     gtag('js', new Date());
     gtag('config', process.env.NEXT_PUBLIC_GA_ID);
-    console.log(window.dataLayer)
   }, []);
   const { draftMode, token } = pageProps
   return (

@@ -33,6 +33,12 @@ export default defineConfig({
     // If you want more content types, you can add them to this array
     types: [projectType, settingsType],
   },
+  beta: {
+    create: {
+      startInCreateEnabled: true,
+      fallbackStudioOrigin: 'www.ilanabode.com/studio'
+    }
+  },
   plugins: [
     structureTool({
       structure: settingsStructure(settingsType),

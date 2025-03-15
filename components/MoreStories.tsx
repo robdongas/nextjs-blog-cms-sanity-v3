@@ -1,15 +1,15 @@
 import { useEffect, useRef, useState } from 'react'
 import gsap from 'gsap'
-import PostPreview from 'components/PostPreview'
-import type { Post } from 'lib/sanity.queries'
+import ProjectPreview from 'components/ProjectPreview'
+import type { Project } from 'lib/sanity.queries'
 
-export default function MoreStories({ posts, level }: { posts: Post[], level: 1 | 2 }) {
-  const postsRef = useRef<HTMLDivElement>(null)
+export default function MoreStories({ projects, level }: { projects: Project[], level: 1 | 2 }) {
+  const projectsRef = useRef<HTMLDivElement>(null)
   const [visualIndices, setVisualIndices] = useState<number[]>([])
 
 
   useEffect(() => {
-    const elements = postsRef.current?.children
+    const elements = projectsRef.current?.children
     if (!elements) return
 
     // Set initial state immediately
@@ -35,7 +35,7 @@ export default function MoreStories({ posts, level }: { posts: Post[], level: 1 
       })
 
       // Create mapping of original index to visual index
-      const newIndices = new Array(posts.length)
+      const newIndices = new Array(projects.length)
       positions.forEach((pos, visualIndex) => {
         newIndices[pos.index] = visualIndex + 1
       })
@@ -53,23 +53,23 @@ export default function MoreStories({ posts, level }: { posts: Post[], level: 1 
         })
       })
     }, 100)
-  }, [posts])
+  }, [projects])
 
   switch (level) {
     case 1:
       return (
         <section>
-          <div ref={postsRef} className="mb-8 columns-1 gap-8 [column-fill:_balance] md:columns-2 lg:columns-3">
-            {posts.map((post, index) => (
-              <div key={post._id} className="break-inside-avoid inline-block w-full mb-4">
-                <PostPreview
-                  title={post.title}
-                  projectType={post.projectType}
-                  coverImage={post.coverImage}
-                  coverHidden={post.coverHidden}
-                  date={post.date}
-                  slug={post.slug}
-                  excerpt={post.excerpt}
+          <div ref={projectsRef} className="mb-8 columns-1 gap-8 [column-fill:_balance] md:columns-2 lg:columns-3">
+            {projects.map((project, index) => (
+              <div key={project._id} className="break-inside-avoid inline-block w-full mb-4">
+                <ProjectPreview
+                  title={project.title}
+                  projectType={project.projectType}
+                  coverImage={project.coverImage}
+                  coverHidden={project.coverHidden}
+                  date={project.date}
+                  slug={project.slug}
+                  excerpt={project.excerpt}
                 />
               </div>
             ))}
@@ -82,17 +82,17 @@ export default function MoreStories({ posts, level }: { posts: Post[], level: 1 
           <h2 className="mb-8 text-6xl font-bold leading-tight tracking-tighter md:text-7xl">
             More Work
           </h2>
-          <div ref={postsRef} className="mb-32 columns-2 gap-8 [column-fill:_balance] md:columns-3 lg:columns-4">
-            {posts.map((post) => (
-              <div key={post._id} className="break-inside-avoid inline-block w-full mb-4">
-                <PostPreview
-                  title={post.title}
-                  projectType={post.projectType}
-                  coverImage={post.coverImage}
-                  coverHidden={post.coverHidden}
-                  date={post.date}
-                  slug={post.slug}
-                  excerpt={post.excerpt}
+          <div ref={projectsRef} className="mb-32 columns-2 gap-8 [column-fill:_balance] md:columns-3 lg:columns-4">
+            {projects.map((project) => (
+              <div key={project._id} className="break-inside-avoid inline-block w-full mb-4">
+                <ProjectPreview
+                  title={project.title}
+                  projectType={project.projectType}
+                  coverImage={project.coverImage}
+                  coverHidden={project.coverHidden}
+                  date={project.date}
+                  slug={project.slug}
+                  excerpt={project.excerpt}
                 />
               </div>
             ))}

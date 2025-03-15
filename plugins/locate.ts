@@ -12,7 +12,7 @@ export const locate: DocumentLocationResolver = (params, context) => {
     } satisfies DocumentLocationsState
   }
 
-  if (params.type === 'post') {
+  if (params.type === 'project') {
     // Listen to the query and fetch the draft and published document
     const doc$ = context.documentStore.listenQuery(
       `*[_id == $id && defined(slug.current)][0]{slug,title}`,
@@ -29,7 +29,7 @@ export const locate: DocumentLocationResolver = (params, context) => {
           locations: [
             {
               title: doc?.title || 'Untitled',
-              href: `/posts/${doc?.slug?.current}`,
+              href: `/projects/${doc?.slug?.current}`,
             },
             {
               title: 'Home',

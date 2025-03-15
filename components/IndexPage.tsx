@@ -1,38 +1,38 @@
 import Container from 'components/BlogContainer'
 import BlogHeader from 'components/BlogHeader'
 import Layout from 'components/BlogLayout'
-import HeroPost from 'components/HeroPost'
+import HeroProject from 'components/HeroProject'
 import IndexPageHead from 'components/IndexPageHead'
-import PostFilter from 'components/PostFilter'
+import ProjectFilter from 'components/ProjectFilter'
 import MoreStories from 'components/MoreStories'
 import * as demo from 'lib/demo.data'
-import type { Post, Settings } from 'lib/sanity.queries'
+import type { Project, Settings } from 'lib/sanity.queries'
 import { useState, useEffect } from 'react'
 import ClientMarquee from './ClientMarquee'
 
 export interface IndexPageProps {
   preview?: boolean
   loading?: boolean
-  posts: Post[]
+  projects: Project[]
   settings: Settings
 }
 
 export default function IndexPage(props: IndexPageProps) {
-  const { preview, loading, posts, settings } = props
-  const [heroPost, ...morePosts] = posts || []
+  const { preview, loading, projects, settings } = props
+  const [heroProject, ...moreProjects] = projects || []
   const { title = demo.title, description = demo.description } = settings || {}
 
-  const [filteredPosts, setFilteredPosts] = useState(posts)
+  const [filteredProjects, setFilteredProjects] = useState(projects)
   const [isTransitioning, setIsTransitioning] = useState(false)
 
   const handleFilterChange = (filter: 'ALL' | 'brand' | 'art') => {
     setIsTransitioning(true)
-    // Small delay to allow fade out before changing posts
+    // Small delay to allow fade out before changing projects
     setTimeout(() => {
       if (filter === 'ALL') {
-        setFilteredPosts(posts)
+        setFilteredProjects(projects)
       } else {
-        setFilteredPosts(posts.filter(post => post.projectType === filter))
+        setFilteredProjects(projects.filter(project => project.projectType === filter))
       }
       setIsTransitioning(false)
     }, 300)
@@ -56,18 +56,18 @@ export default function IndexPage(props: IndexPageProps) {
       <Layout preview={preview} loading={loading}>
         <Container>
           <BlogHeader title={title} description={description} level={1} />
-          {/* {heroPost && (
-            <HeroPost
-              title={heroPost.title}
-              coverImage={heroPost.coverImage}
-              date={heroPost.date}
-              slug={heroPost.slug}
-              excerpt={heroPost.excerpt}
+          {/* {heroProject && (
+            <HeroProject
+              title={heroProject.title}
+              coverImage={heroProject.coverImage}
+              date={heroProject.date}
+              slug={heroProject.slug}
+              excerpt={heroProject.excerpt}
             />
           )} */}
-          <PostFilter onFilterChange={handleFilterChange}/>
+          <ProjectFilter onFilterChange={handleFilterChange}/>
           <div className={`transition-opacity duration-200 ${isTransitioning ? 'opacity-0' : 'opacity-100'}`}>
-            {posts.length > 0 && <MoreStories posts={filteredPosts} level={1} />}
+            {projects.length > 0 && <MoreStories projects={filteredProjects} level={1} />}
           </div>
         </Container>
         <ClientMarquee clients={clients} />

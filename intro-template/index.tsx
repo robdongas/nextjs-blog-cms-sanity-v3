@@ -13,8 +13,8 @@ export default function IntroTemplate() {
     () => false,
   )
   const studioURL = mounted ? `${window.location.origin}/studio` : null
-  const createPostURL = mounted
-    ? `${window.location.origin}/studio/intent/create/template=post;type=post/`
+  const createProjectURL = mounted
+    ? `${window.location.origin}/studio/intent/create/template=project;type=project/`
     : null
   const isLocalHost = mounted ? window.location.hostname === 'localhost' : false
   const hasUTMtags = mounted ? window.location.search.includes('utm') : false
@@ -93,7 +93,7 @@ export default function IntroTemplate() {
                   <div className="mt-3">
                     <Link
                       className="inline-flex rounded-sm bg-blue-500 px-4 py-2 text-white hover:bg-blue-800"
-                      href={createPostURL}
+                      href={createProjectURL}
                     >
                       Go to Sanity Studio
                     </Link>
@@ -112,10 +112,10 @@ export default function IntroTemplate() {
 
                   {isLocalHost ? (
                     <div className="text-xs text-gray-700 text-pretty">
-                      Start editing your content structure by changing the post
+                      Start editing your content structure by changing the project
                       schema in
                       <div className="w-fit bg-slate-200 px-2">
-                        <pre>schemas/post.ts</pre>
+                        <pre>schemas/project.ts</pre>
                       </div>
                     </div>
                   ) : (

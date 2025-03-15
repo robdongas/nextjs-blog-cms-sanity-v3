@@ -3,11 +3,11 @@ import { useState } from 'react'
 type DisplayFilter = 'ALL' | 'BRAND' | 'PERSONAL'
 type ProjectType = 'brand' | 'art'
 
-interface PostFilterProps {
+interface ProjectFilterProps {
   onFilterChange: (filter: ProjectType | 'ALL') => void
 }
 
-export default function PostFilter({ onFilterChange }: PostFilterProps) {
+export default function ProjectFilter({ onFilterChange }: ProjectFilterProps) {
   const [activeFilter, setActiveFilter] = useState<DisplayFilter>('ALL')
 
   const filterMap: Record<DisplayFilter, ProjectType | 'ALL'> = {

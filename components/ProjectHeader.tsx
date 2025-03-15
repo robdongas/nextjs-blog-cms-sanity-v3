@@ -1,15 +1,15 @@
 import CoverImage from 'components/CoverImage'
-import Date from 'components/PostDate'
-import PostTitle from 'components/PostTitle'
-import type { Post } from 'lib/sanity.queries'
+import Date from 'components/ProjectDate'
+import ProjectTitle from 'components/ProjectTitle'
+import type { Project } from 'lib/sanity.queries'
 
-export default function PostHeader(
-  props: Pick<Post, 'title' | 'coverImage' | 'coverHidden' | 'date' | 'slug'>,
+export default function ProjectHeader(
+  props: Pick<Project, 'title' | 'coverImage' | 'coverHidden' | 'date' | 'slug'>,
 ) {
   const { title, coverImage, coverHidden, date, slug } = props
   return (
     <>
-      <PostTitle>{title}</PostTitle>
+      <ProjectTitle>{title}</ProjectTitle>
       <div className="mb-8 sm:mx-0 md:mb-16">
         {!coverHidden &&
           <CoverImage title={title} image={coverImage} priority slug={slug} />

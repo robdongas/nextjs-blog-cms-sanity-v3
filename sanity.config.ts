@@ -18,7 +18,7 @@ import { defineConfig } from 'sanity'
 import { presentationTool } from 'sanity/presentation'
 import { structureTool } from 'sanity/structure'
 import { unsplashImageAsset } from 'sanity-plugin-asset-source-unsplash'
-import postType from 'schemas/post'
+import projectType from 'schemas/project'
 import settingsType from 'schemas/settings'
 
 const title =
@@ -31,7 +31,7 @@ export default defineConfig({
   title,
   schema: {
     // If you want more content types, you can add them to this array
-    types: [postType, settingsType],
+    types: [projectType, settingsType],
   },
   plugins: [
     structureTool({

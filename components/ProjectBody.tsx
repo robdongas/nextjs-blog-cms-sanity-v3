@@ -1,5 +1,5 @@
 /**
- * This component uses Portable Text to render a post body.
+ * This component uses Portable Text to render a project body.
  *
  * You can learn more about Portable Text on:
  * https://www.sanity.io/docs/block-content
@@ -25,7 +25,7 @@ const myPortableTextComponents: Partial<PortableTextReactComponents> = {
   },
 }
 
-export default function PostBody({ content }) {
+export default function ProjectBody({ content }) {
   useEffect(() => {
     let lightbox = new PhotoSwipeLightbox({
       gallery: '.prose',

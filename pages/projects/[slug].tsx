@@ -1,19 +1,19 @@
-import PostPage from 'components/PostPage'
-import PreviewPostPage from 'components/PreviewPostPage'
+import ProjectPage from 'components/ProjectPage'
+import PreviewProjectPage from 'components/PreviewProjectPage'
 import { readToken } from 'lib/sanity.api'
 import {
-  getAllPostsSlugs,
+  getAllProjectsSlugs,
   getClient,
-  getPostAndMoreStories,
+  getProjectAndMoreStories,
   getSettings,
 } from 'lib/sanity.client'
-import { Post, Settings, postSlugsQuery } from 'lib/sanity.queries'
+import { Project, Settings, projectSlugsQuery } from 'lib/sanity.queries'
 import { GetStaticProps } from 'next'
 import type { SharedPageProps } from 'pages/_app'
 
 interface PageProps extends SharedPageProps {
-  post: Post
-  morePosts: Post[]
+  project: Project
+  moreProjects: Project[]
   settings?: Settings
 }
 
@@ -22,27 +22,27 @@ interface Query {
 }
 
 export default function ProjectSlugRoute(props: PageProps) {
-  const { settings, post, morePosts, draftMode } = props
+  const { settings, project, moreProjects, draftMode } = props
 
   if (draftMode) {
     return (
-      <PreviewPostPage post={post} morePosts={morePosts} settings={settings} />
+      <PreviewProjectPage project={project} moreProjects={moreProjects} settings={settings} />
     )
   }
 
-  return <PostPage post={post} morePosts={morePosts} settings={settings} />
+  return <ProjectPage project={project} moreProjects={moreProjects} settings={settings} />
 }
 
 export const getStaticProps: GetStaticProps<PageProps, Query> = async (ctx) => {
   const { draftMode = false, params = {} } = ctx
   const client = getClient(draftMode ? { token: readToken } : undefined)
 
-  const [settings, { post, morePosts }] = await Promise.all([
+  const [settings, { project, moreProjects }] = await Promise.all([
     getSettings(client),
-    getPostAndMoreStories(client, params.slug),
+    getProjectAndMoreStories(client, params.slug),
   ])
 
-  if (!post) {
+  if (!project) {
     return {
       notFound: true,
     }
@@ -50,8 +50,8 @@ export const getStaticProps: GetStaticProps<PageProps, Query> = async (ctx) => {
 
   return {
     props: {
-      post,
-      morePosts,
+      project,
+      moreProjects,
       settings,
       draftMode,
       token: draftMode ? readToken : '',
@@ -60,10 +60,10 @@ export const getStaticProps: GetStaticProps<PageProps, Query> = async (ctx) => {
 }
 
 export const getStaticPaths = async () => {
-  const slugs = await getAllPostsSlugs()
+  const slugs = await getAllProjectsSlugs()
 
   return {
-    paths: slugs?.map(({ slug }) => `/posts/${slug}`) || [],
+    paths: slugs?.map(({ slug }) => `/projects/${slug}`) || [],
     fallback: 'blocking',
   }
 }

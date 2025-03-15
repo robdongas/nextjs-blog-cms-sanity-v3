@@ -1,6 +1,6 @@
 import groq from 'groq'
 
-const postFields = groq`
+const projectFields = groq`
   _id,
   title,
   date,
@@ -15,33 +15,33 @@ const postFields = groq`
 export const settingsQuery = groq`*[_type == "settings"][0]`
 
 export const indexQuery = groq`
-*[_type == "post"] | order(date desc, _updatedAt desc) {
-  ${postFields}
+*[_type == "project"] | order(date desc, _updatedAt desc) {
+  ${projectFields}
 }`
 
-export const postAndMoreStoriesQuery = groq`
+export const projectAndMoreStoriesQuery = groq`
 {
-  "post": *[_type == "post" && slug.current == $slug] | order(_updatedAt desc) [0] {
+  "project": *[_type == "project" && slug.current == $slug] | order(_updatedAt desc) [0] {
     content,
-    ${postFields}
+    ${projectFields}
   },
-  "morePosts": *[_type == "post" && slug.current != $slug] | order(date desc, _updatedAt desc) [0...4] {
+  "moreProjects": *[_type == "project" && slug.current != $slug] | order(date desc, _updatedAt desc) [0...4] {
     content,
-    ${postFields}
+    ${projectFields}
   }
 }`
 
-export const postSlugsQuery = groq`
-*[_type == "post" && defined(slug.current)][].slug.current
+export const projectSlugsQuery = groq`
+*[_type == "project" && defined(slug.current)][].slug.current
 `
 
-export const postBySlugQuery = groq`
-*[_type == "post" && slug.current == $slug][0] {
-  ${postFields}
+export const projectBySlugQuery = groq`
+*[_type == "project" && slug.current == $slug][0] {
+  ${projectFields}
 }
 `
 
-export interface Post {
+export interface Project {
   _id: string
   title?: string
   coverImage?: any

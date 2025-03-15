@@ -31,7 +31,7 @@ export const settingsPlugin = definePlugin<{ type: string }>(({ type }) => {
 })
 
 // The StructureResolver is how we're changing the DeskTool structure to linking to a single "Settings" document, instead of rendering "settings" in a list
-// like how "Post" is handled.
+// like how "Project" is handled.
 export const settingsStructure = (
   typeDef: DocumentDefinition,
 ): StructureResolver => {

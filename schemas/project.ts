@@ -3,10 +3,10 @@ import { format, parseISO } from 'date-fns'
 import { rule } from 'postcss'
 import { defineField, defineType } from 'sanity'
 /**
- * This file is the schema definition for a post.
+ * This file is the schema definition for a project.
  *
  * Here you'll be able to edit the different fields that appear when you 
- * create or edit a post in the studio.
+ * create or edit a project in the studio.
  * 
  * Here you can see the different schema types that are available:
 
@@ -15,8 +15,8 @@ import { defineField, defineType } from 'sanity'
  */
 
 export default defineType({
-  name: 'post',
-  title: 'Post',
+  name: 'project',
+  title: 'Project',
   icon: BookIcon,
   type: 'document',
   fields: [
@@ -92,10 +92,10 @@ export default defineType({
     }),
     defineField({
       name: 'coverHidden',
-      title: 'Hide Cover on Post',
+      title: 'Hide Cover on Project',
       type: 'boolean',
       initialValue: false,
-      description: 'Determines whether the cover image is hidden on the post page'
+      description: 'Determines whether the cover image is hidden on the project page'
     }),
     defineField({
       name: 'date',

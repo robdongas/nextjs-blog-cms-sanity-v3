@@ -41,7 +41,7 @@ export default function PostFilter({ onFilterChange }: PostFilterProps) {
             {filter}
           </button>
           {index < Object.keys(filterMap).length - 1 && (
-            <span className="text-gray-400 text-xl">|</span>
+            <span key={`${filter}-sep`} className="text-gray-400 text-xl">|</span>
           )}
         </>
       ))}

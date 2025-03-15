@@ -12,7 +12,6 @@ interface CoverImageProps {
 
 export default function CoverImage(props: CoverImageProps) {
   const { title, slug, image: source, priority } = props
-  console.log(source)
   const image = source?.asset?._ref ? (
     <div className='relative'>
       <Image

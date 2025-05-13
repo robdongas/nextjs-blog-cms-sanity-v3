@@ -28,6 +28,7 @@
     "classnames": "2.5.1",
     "date-fns": "4.1.0",
     "groq": "^3.76.1",
+    "gsap": "^3.13.0",
     "intl-segmenter-polyfill": "0.4.4",
     "next": "^15.2.4",
     "next-sanity": "9.8.57",

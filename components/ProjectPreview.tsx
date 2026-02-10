@@ -14,7 +14,7 @@ export default function ProjectPreview({
 }: Omit<Project, '_id'>) {
   return (
     <div {...{ "project-type": `${projectType}` }}>
-      <div className="mb-5 relative group">
+      <div className="relative group">
         <div className="relative">
           <CoverImage
             slug={slug}

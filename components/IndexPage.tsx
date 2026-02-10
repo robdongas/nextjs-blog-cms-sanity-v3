@@ -66,7 +66,7 @@ export default function IndexPage(props: IndexPageProps) {
             />
           )} */}
           <ProjectFilter onFilterChange={handleFilterChange}/>
-          <div className={`transition-opacity duration-200 ${isTransitioning ? 'opacity-0' : 'opacity-100'}`}>
+          <div className={`container max-w-200 mx-auto transition-opacity duration-200 ${isTransitioning ? 'opacity-0' : 'opacity-100'}`}>
             {projects.length > 0 && <MoreStories projects={filteredProjects} level={1} />}
           </div>
         </Container>

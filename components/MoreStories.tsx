@@ -59,9 +59,9 @@ export default function MoreStories({ projects, level }: { projects: Project[], 
     case 1:
       return (
         <section>
-          <div ref={projectsRef} className="mb-8 columns-1 gap-8 [column-fill:_balance] md:columns-2 lg:columns-3">
+          <div ref={projectsRef} className="mb-8 columns-1 gap-2 [column-fill:_balance] md:columns-2 lg:columns-2">
             {projects.map((project, index) => (
-              <div key={project._id} className="break-inside-avoid inline-block w-full mb-4">
+              <div key={project._id} className="break-inside-avoid inline-block w-full mb-1">
                 <ProjectPreview
                   title={project.title}
                   projectType={project.projectType}

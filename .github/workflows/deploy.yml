@@ -1,3 +1,5 @@
+# Deploy to Digital Ocean Droplet on push to main.
+# Required repo secrets: DROPLET_IP, DROPLET_USER, SSH_PRIVATE_KEY
 name: Deploy to DO
 
 on:
@@ -13,14 +15,15 @@ jobs:
         uses: actions/checkout@v4
 
       - name: Deploy to Droplet
-        uses: appleboy/ssh-action@master
+        uses: appleboy/ssh-action@v1.2.5
         with:
           host: ${{ secrets.DROPLET_IP }}
           username: ${{ secrets.DROPLET_USER }}
           key: ${{ secrets.SSH_PRIVATE_KEY }}
           script: |
+            set -e
             cd /var/www/html
             git pull origin main
-            npm install
+            npm ci
             npm run build
-            pm2 restart ecosystem.config.cjs
+            pm2 restart ecosystem.config.cjs --update-env || pm2 start ecosystem.config.cjs

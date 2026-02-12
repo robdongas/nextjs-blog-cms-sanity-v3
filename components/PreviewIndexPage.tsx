@@ -5,7 +5,7 @@ import {
   type Settings,
   settingsQuery,
 } from 'lib/sanity.queries'
-import { useLiveQuery } from 'next-sanity/preview'
+import { useLiveQuery } from '@sanity/preview-kit'
 
 export default function PreviewIndexPage(props: IndexPageProps) {
   const [projects, loadingProjects] = useLiveQuery<Project[]>(props.projects, indexQuery)

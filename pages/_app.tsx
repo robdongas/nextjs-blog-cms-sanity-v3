@@ -30,8 +30,8 @@ export default function App({
 
   useEffect(() => {
     window.dataLayer = window.dataLayer || [];
-    function gtag() {
-      dataLayer.push(arguments);
+    const gtag = (...args: unknown[]) => {
+      window.dataLayer.push(args);
     }
     gtag('js', new Date());
     gtag('config', process.env.NEXT_PUBLIC_GA_ID);

@@ -1,6 +1,5 @@
 # Deploy to Digital Ocean Droplet on push to main.
-# Required repo secrets: DROPLET_IP (or DROPLET_HOST), DROPLET_USER, SSH_PRIVATE_KEY
-# Names are case-sensitive. Use Settings → Secrets and variables → Actions.
+# Required repo secrets: DROPLET_ID, DROPLET_USER, SSH_PRIVATE_KEY
 name: Deploy to DO
 
 on:
@@ -15,23 +14,10 @@ jobs:
       - name: Checkout Code
         uses: actions/checkout@v4
 
-      - name: Validate secrets
-        run: |
-          MISSING=""
-          if [ -z "${{ secrets.DROPLET_IP }}" ] && [ -z "${{ secrets.DROPLET_HOST }}" ]; then
-            MISSING="${MISSING}DROPLET_IP or DROPLET_HOST (droplet IP/hostname) "
-          fi
-          if [ -z "${{ secrets.DROPLET_USER }}" ]; then MISSING="${MISSING}DROPLET_USER "; fi
-          if [ -z "${{ secrets.SSH_PRIVATE_KEY }}" ]; then MISSING="${MISSING}SSH_PRIVATE_KEY "; fi
-          if [ -n "$MISSING" ]; then
-            echo "::error::Missing or empty secrets (exact names, case-sensitive): $MISSING"
-            exit 1
-          fi
-
       - name: Deploy to Droplet
         uses: appleboy/ssh-action@v1.2.5
         with:
-          host: ${{ secrets.DROPLET_IP || secrets.DROPLET_HOST }}
+          host: ${{ secrets.DROPLET_ID }}
           username: ${{ secrets.DROPLET_USER }}
           key: ${{ secrets.SSH_PRIVATE_KEY }}
           script: |

@@ -6,14 +6,14 @@ import sitemap from '@astrojs/sitemap'
 export default defineConfig({
   site: 'https://www.ilanabode.com',
   output: 'static',
+  server: {
+    allowedHosts: ['www.ilanabode.com', 'ilanabode.com'],
+  },
   integrations: [
     react(),
     sitemap(),
   ],
   vite: {
     plugins: [tailwindcss()],
-    preview: {
-      allowedHosts: ['www.ilanabode.com', 'ilanabode.com'],
-    },
   },
 })

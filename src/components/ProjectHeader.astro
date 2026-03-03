@@ -1,0 +1,22 @@
+---
+import CoverImage from './CoverImage.astro'
+import ProjectTitle from './ProjectTitle.astro'
+import type { Project } from '../lib/sanity.queries'
+
+interface Props {
+  title?: string
+  coverImage?: any
+  coverHidden?: boolean
+  date?: string
+  slug?: string
+}
+
+const { title, coverImage, coverHidden, date, slug } = Astro.props
+---
+
+<ProjectTitle>{title}</ProjectTitle>
+<div class="mb-8 sm:mx-0 md:mb-16">
+  {!coverHidden && (
+    <CoverImage title={title || ''} image={coverImage} priority slug={slug} />
+  )}
+</div>

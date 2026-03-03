@@ -3,8 +3,8 @@ module.exports = {
   apps: [
     {
       name: 'ib-site',
-      script: 'node_modules/next/dist/bin/next',
-      args: 'start',
+      script: 'node_modules/.bin/astro',
+      args: 'preview',
       cwd: __dirname,
       instances: 1,
       autorestart: true,

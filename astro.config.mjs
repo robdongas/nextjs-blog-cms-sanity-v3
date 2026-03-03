@@ -12,5 +12,8 @@ export default defineConfig({
   ],
   vite: {
     plugins: [tailwindcss()],
+    preview: {
+      allowedHosts: ['www.ilanabode.com', 'ilanabode.com'],
+    },
   },
 })

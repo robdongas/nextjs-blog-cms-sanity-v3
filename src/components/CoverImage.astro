@@ -1,0 +1,52 @@
+---
+import { urlForImage } from '../lib/sanity.image'
+
+interface Props {
+  title: string
+  slug?: string
+  image: any
+  priority?: boolean
+}
+
+const { title, slug, image: source, priority } = Astro.props
+const hasImage = source?.asset?._ref
+const imageUrl = hasImage ? urlForImage(source).url() : null
+const width = source?.dimensions?.width || 2000
+const height = source?.dimensions?.height || 1000
+---
+
+<div class="sm:mx-0">
+  {slug ? (
+    <a href={`/projects/${slug}`} aria-label={title}>
+      {hasImage ? (
+        <div class="relative">
+          <img
+            class="h-auto w-full"
+            src={imageUrl}
+            alt=""
+            width={width}
+            height={height}
+            loading={priority ? 'eager' : 'lazy'}
+          />
+        </div>
+      ) : (
+        <div style="padding-top: 50%; background-color: #ddd;"></div>
+      )}
+    </a>
+  ) : (
+    hasImage ? (
+      <div class="relative">
+        <img
+          class="h-auto w-full"
+          src={imageUrl}
+          alt=""
+          width={width}
+          height={height}
+          loading={priority ? 'eager' : 'lazy'}
+        />
+      </div>
+    ) : (
+      <div style="padding-top: 50%; background-color: #ddd;"></div>
+    )
+  )}
+</div>

@@ -1,0 +1,31 @@
+---
+import '../styles/tailwind.css'
+import '../styles/globals.css'
+
+import BaseLayout from '../layouts/BaseLayout.astro'
+import BlogContainer from '../components/BlogContainer.astro'
+import BlogHeader from '../components/BlogHeader.astro'
+import IndexPageInteractive from '../components/IndexPageInteractive.tsx'
+
+import { getClient, getSettings, getAllProjects } from '../lib/sanity.client'
+import * as demo from '../lib/demo.data'
+
+const client = getClient()
+const [settings, projects] = await Promise.all([
+  getSettings(client),
+  getAllProjects(client),
+])
+
+const { title = demo.title, description = demo.description } = settings || {}
+
+// Build page meta
+const pageTitle = title
+const ogImageTitle = settings?.ogImage?.title || demo.ogImageTitle
+---
+
+<BaseLayout title={pageTitle}>
+  <BlogContainer>
+    <BlogHeader title={title} description={description} level={1} />
+    <IndexPageInteractive projects={projects} client:load />
+  </BlogContainer>
+</BaseLayout>

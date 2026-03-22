@@ -1,6 +1,6 @@
 # Deploy to Digital Ocean Droplet on push to main.
 # Builds in CI (to avoid OOM on the droplet), then deploys the
-# pre-built dist/ via SCP and restarts the app with PM2.
+# pre-built dist/ via SSH and restarts the app with PM2.
 #
 # Required repo secrets:
 #   DROPLET_ID, DROPLET_USER, SSH_PRIVATE_KEY
@@ -41,32 +41,29 @@ jobs:
           PUBLIC_GA_ID: ${{ secrets.PUBLIC_GA_ID }}
           SANITY_API_READ_TOKEN: ${{ secrets.SANITY_API_READ_TOKEN }}
 
-      - name: Clean old build on Droplet
-        uses: appleboy/ssh-action@v1.2.5
-        with:
-          host: ${{ secrets.DROPLET_ID }}
-          username: ${{ secrets.DROPLET_USER }}
-          key: ${{ secrets.SSH_PRIVATE_KEY }}
-          script: rm -rf /var/www/html/dist
+      - name: Deploy to Droplet
+        env:
+          SSH_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
+          REMOTE_HOST: ${{ secrets.DROPLET_ID }}
+          REMOTE_USER: ${{ secrets.DROPLET_USER }}
+        run: |
+          mkdir -p ~/.ssh
+          echo "$SSH_KEY" > ~/.ssh/deploy_key
+          chmod 600 ~/.ssh/deploy_key
+          SSH_OPTS="-o StrictHostKeyChecking=no -o ConnectTimeout=120 -i ~/.ssh/deploy_key"
+          REMOTE="${REMOTE_USER}@${REMOTE_HOST}"
 
-      - name: Deploy dist to Droplet
-        uses: appleboy/scp-action@v0.1.7
-        with:
-          host: ${{ secrets.DROPLET_ID }}
-          username: ${{ secrets.DROPLET_USER }}
-          key: ${{ secrets.SSH_PRIVATE_KEY }}
-          source: "dist/"
-          target: "/var/www/html/"
+          # Pipe compressed dist/ to the droplet over a single SSH connection
+          tar czf - dist/ | ssh $SSH_OPTS "$REMOTE" \
+            'rm -rf /var/www/html/dist && tar xzf - -C /var/www/html/'
 
-      - name: Update repo and restart
-        uses: appleboy/ssh-action@v1.2.5
-        with:
-          host: ${{ secrets.DROPLET_ID }}
-          username: ${{ secrets.DROPLET_USER }}
-          key: ${{ secrets.SSH_PRIVATE_KEY }}
-          script: |
+          # Pull latest code, install production deps, restart PM2
+          ssh $SSH_OPTS "$REMOTE" bash -s <<'REMOTE_SCRIPT'
             set -e
             cd /var/www/html
             git pull origin main
             npm ci --omit=dev
             pm2 restart ecosystem.config.cjs --update-env || pm2 start ecosystem.config.cjs
+          REMOTE_SCRIPT
+
+          rm -f ~/.ssh/deploy_key

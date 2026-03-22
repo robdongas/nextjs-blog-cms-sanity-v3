@@ -6,7 +6,6 @@ import '../../styles/globals.css'
 
 import BaseLayout from '../../layouts/BaseLayout.astro'
 import BlogContainer from '../../components/BlogContainer.astro'
-import BlogHeader from '../../components/BlogHeader.astro'
 import ProjectHeader from '../../components/ProjectHeader.astro'
 import SectionSeparator from '../../components/SectionSeparator.astro'
 import ProjectBody from '../../components/ProjectBody.tsx'
@@ -49,7 +48,6 @@ const pageTitle = project.title ? `${project.title} | ${title}` : title
 
 <BaseLayout title={pageTitle} ogImage={ogImage}>
   <BlogContainer>
-    <BlogHeader title={title} level={2} />
     <article>
       <ProjectHeader
         title={project.title}

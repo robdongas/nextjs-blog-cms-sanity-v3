@@ -1,0 +1,46 @@
+---
+export const prerender = true
+
+import '../styles/tailwind.css'
+import '../styles/globals.css'
+
+import BaseLayout from '../layouts/BaseLayout.astro'
+import { PortableText } from '@portabletext/react'
+
+import { getClient, getSettings, getAbout } from '../lib/sanity.client'
+import { urlForImage } from '../lib/sanity.image'
+import * as demo from '../lib/demo.data'
+
+const client = getClient()
+const [settings, about] = await Promise.all([
+  getSettings(client),
+  getAbout(client),
+])
+
+const { title = demo.title } = settings || {}
+const pageTitle = `About | ${title}`
+
+const imageUrl = about.image
+  ? urlForImage(about.image).width(1200).height(1600).url()
+  : undefined
+const imageAlt = about.image?.alt || 'Portrait'
+---
+
+<BaseLayout title={pageTitle}>
+  <section class="container mx-auto px-5 grid grid-cols-1 md:grid-cols-2 gap-8 items-center min-h-[calc(100vh-5rem)]">
+    {imageUrl && (
+      <div class="w-full max-h-[70vh]">
+        <img
+          src={imageUrl}
+          alt={imageAlt}
+          class="w-full h-full max-h-[70vh] object-cover rounded-md"
+        />
+      </div>
+    )}
+    <div class="flex items-center py-12 md:py-0 md:px-8 lg:px-12">
+      <div class="prose prose-lg dark:prose-invert max-w-xl">
+        {about.body && <PortableText value={about.body} client:load />}
+      </div>
+    </div>
+  </section>
+</BaseLayout>

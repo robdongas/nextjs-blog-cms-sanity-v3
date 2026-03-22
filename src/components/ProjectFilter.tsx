@@ -25,14 +25,14 @@ export default function ProjectFilter({ onFilterChange }: ProjectFilterProps) {
     }
 
     return (
-        <ul className="list-none flex flex-col my-8 p-0 m-0">
+        <ul className="list-none flex flex-col mb-8 p-0 m-0">
             {displayOrder.map((filter) => (
                 <li key={filter}>
                     <button
                         type="button"
                         onClick={() => handleFilterClick(filter)}
                         className={`
-              text-xl transition-all duration-300 text-center
+              text-sm transition-all duration-300 text-center
               hover:font-bold hover:cursor-none
               ${activeFilter === filter
                                 ? 'font-bold tracking-[0.6em] mr-[-0.6em]'

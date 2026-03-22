@@ -6,6 +6,8 @@ import {
     useCdn,
 } from './sanity.api'
 import {
+    type About,
+    aboutQuery,
     indexQuery,
     type Project,
     projectAndMoreStoriesQuery,
@@ -53,4 +55,8 @@ export async function getProjectAndMoreStories(
     slug: string,
 ): Promise<{ project: Project; moreProjects: Project[] }> {
     return await client.fetch(projectAndMoreStoriesQuery, { slug })
+}
+
+export async function getAbout(client: SanityClient): Promise<About> {
+    return (await client.fetch(aboutQuery)) || {}
 }

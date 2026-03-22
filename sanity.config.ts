@@ -4,6 +4,7 @@ import { previewDocumentNode } from 'plugins/previewPane'
 import { settingsPlugin, settingsStructure } from 'plugins/settings'
 import { defineConfig } from 'sanity'
 import { structureTool } from 'sanity/structure'
+import aboutType from 'schemas/about'
 import projectType from 'schemas/project'
 import settingsType from 'schemas/settings'
 
@@ -16,14 +17,15 @@ export default defineConfig({
   apiVersion: apiVersion,
   title: 'Ilana Bodenstein',
   schema: {
-    types: [projectType, settingsType],
+    types: [aboutType, projectType, settingsType],
   },
   plugins: [
     structureTool({
-      structure: settingsStructure(settingsType),
+      structure: settingsStructure(settingsType, aboutType),
       defaultDocumentNode: previewDocumentNode(),
     }),
     settingsPlugin({ type: settingsType.name }),
+    settingsPlugin({ type: aboutType.name }),
     visionTool({ defaultApiVersion: apiVersion }),
     assist(),
   ],

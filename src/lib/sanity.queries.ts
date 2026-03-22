@@ -41,6 +41,12 @@ export const projectBySlugQuery = groq`
 }
 `
 
+export const aboutQuery = groq`*[_type == "about"][0]{
+  title,
+  image,
+  body
+}`
+
 export interface Project {
     _id: string
     title?: string
@@ -60,4 +66,10 @@ export interface Settings {
     ogImage?: {
         title?: string
     }
+}
+
+export interface About {
+    title?: string
+    image?: any
+    body?: any[]
 }

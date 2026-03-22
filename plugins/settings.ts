@@ -7,7 +7,7 @@ import type { StructureResolver } from 'sanity/structure'
 
 export const settingsPlugin = definePlugin<{ type: string }>(({ type }) => {
   return {
-    name: 'settings',
+    name: `singleton-${type}`,
     document: {
       // Hide 'Settings' from new document options
       // https://user-images.githubusercontent.com/81981/195728798-e0c6cf7e-d442-4e58-af3a-8cd99d7fcc28.png
@@ -30,14 +30,13 @@ export const settingsPlugin = definePlugin<{ type: string }>(({ type }) => {
   }
 })
 
-// The StructureResolver is how we're changing the DeskTool structure to linking to a single "Settings" document, instead of rendering "settings" in a list
-// like how "Project" is handled.
 export const settingsStructure = (
-  typeDef: DocumentDefinition,
+  ...typeDefs: DocumentDefinition[]
 ): StructureResolver => {
   return (S) => {
-    // The `Settings` root list item
-    const settingsListItem = // A singleton not using `documentListItem`, eg no built-in preview
+    const singletonNames = typeDefs.map((t) => t.name)
+
+    const singletonItems = typeDefs.map((typeDef) =>
       S.listItem()
         .title(typeDef.title)
         .icon(typeDef.icon)
@@ -46,15 +45,15 @@ export const settingsStructure = (
             .id(typeDef.name)
             .schemaType(typeDef.name)
             .documentId(typeDef.name),
-        )
+        ),
+    )
 
-    // The default root list items (except custom ones)
     const defaultListItems = S.documentTypeListItems().filter(
-      (listItem) => listItem.getId() !== typeDef.name,
+      (listItem) => !singletonNames.includes(listItem.getId()!),
     )
 
     return S.list()
       .title('Content')
-      .items([settingsListItem, S.divider(), ...defaultListItems])
+      .items([...singletonItems, S.divider(), ...defaultListItems])
   }
 }

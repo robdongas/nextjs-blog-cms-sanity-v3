@@ -1,12 +1,5 @@
-// This plugin is responsible for adding a “Preview” tab to the document pane
-// You can add any React component to `S.view.component` and it will be rendered in the pane
-// and have access to content in the form in real-time.
-// It's part of the Studio's “Structure Builder API” and is documented here:
-// https://www.sanity.io/docs/structure-builder-reference
-
-import { DRAFT_MODE_ROUTE } from 'lib/sanity.api'
 import type { DefaultDocumentNodeResolver } from 'sanity/structure'
-import { Iframe, IframeOptions } from 'sanity-plugin-iframe-pane'
+import { Iframe, type IframeOptions } from 'sanity-plugin-iframe-pane'
 import projectType from 'schemas/project'
 
 const iframeOptions = {
@@ -25,7 +18,6 @@ const iframeOptions = {
           return new Error(`Unknown document type: ${document?._type}`)
       }
     },
-    draftMode: DRAFT_MODE_ROUTE,
   },
   reload: { button: true },
 } satisfies IframeOptions
@@ -33,7 +25,6 @@ const iframeOptions = {
 export const previewDocumentNode = (): DefaultDocumentNodeResolver => {
   return (S, { schemaType }) => {
     switch (schemaType) {
-
       case projectType.name:
         return S.document().views([
           S.view.form(),

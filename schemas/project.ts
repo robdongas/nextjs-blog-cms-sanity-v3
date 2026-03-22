@@ -1,6 +1,5 @@
 import { BookIcon } from '@sanity/icons'
 import { format, parseISO } from 'date-fns'
-import { rule } from 'postcss'
 import { defineField, defineType } from 'sanity'
 /**
  * This file is the schema definition for a project.

@@ -94,7 +94,7 @@ export default defineType({
       name: 'coverHidden',
       title: 'Hide Cover on Project',
       type: 'boolean',
-      initialValue: false,
+      initialValue: true,
       description: 'Determines whether the cover image is hidden on the project page'
     }),
     defineField({

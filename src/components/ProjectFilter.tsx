@@ -1,19 +1,22 @@
-import { Fragment, useState } from 'react'
+import { useState } from 'react'
 
-type DisplayFilter = 'ALL' | 'BRAND' | 'PERSONAL'
-type ProjectType = 'brand' | 'art'
+type DisplayFilter = 'ALL' | 'BRAND' | 'LOGOS' | 'PERSONAL'
+type ProjectType = 'brand' | 'art' | 'logos'
 
 interface ProjectFilterProps {
     onFilterChange: (filter: ProjectType | 'ALL') => void
 }
 
+const displayOrder: DisplayFilter[] = ['ALL', 'BRAND', 'LOGOS', 'PERSONAL']
+
 export default function ProjectFilter({ onFilterChange }: ProjectFilterProps) {
     const [activeFilter, setActiveFilter] = useState<DisplayFilter>('ALL')
 
     const filterMap: Record<DisplayFilter, ProjectType | 'ALL'> = {
-        'BRAND': 'brand',
-        'ALL': 'ALL',
-        'PERSONAL': 'art'
+        ALL: 'ALL',
+        BRAND: 'brand',
+        PERSONAL: 'art',
+        LOGOS: 'logos',
     }
 
     const handleFilterClick = (displayFilter: DisplayFilter) => {
@@ -22,10 +25,11 @@ export default function ProjectFilter({ onFilterChange }: ProjectFilterProps) {
     }
 
     return (
-        <div className="flex justify-center items-center gap-4 my-8">
-            {(Object.keys(filterMap) as DisplayFilter[]).map((filter, index) => (
-                <Fragment key={filter}>
+        <ul className="list-none flex flex-col my-8 p-0 m-0">
+            {displayOrder.map((filter) => (
+                <li key={filter}>
                     <button
+                        type="button"
                         onClick={() => handleFilterClick(filter)}
                         className={`
               text-xl transition-all duration-300 text-center
@@ -38,11 +42,8 @@ export default function ProjectFilter({ onFilterChange }: ProjectFilterProps) {
                     >
                         {filter}
                     </button>
-                    {index < Object.keys(filterMap).length - 1 && (
-                        <span className="text-gray-400 text-xl">|</span>
-                    )}
-                </Fragment>
+                </li>
             ))}
-        </div>
+        </ul>
     )
 }

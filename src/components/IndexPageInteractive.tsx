@@ -22,7 +22,7 @@ export default function IndexPageInteractive({ projects }: IndexPageInteractiveP
     const [filteredProjects, setFilteredProjects] = useState(projects)
     const [isTransitioning, setIsTransitioning] = useState(false)
 
-    const handleFilterChange = (filter: 'ALL' | 'brand' | 'art') => {
+    const handleFilterChange = (filter: 'ALL' | 'brand' | 'art' | 'logos') => {
         setIsTransitioning(true)
         setTimeout(() => {
             if (filter === 'ALL') {

@@ -44,7 +44,8 @@ export default defineType({
       options: {
         list: [
           { title: 'Brand', value: 'brand' },
-          { title: 'Art', value: 'art' }
+          { title: 'Art', value: 'art' },
+          { title: 'Logos', value: 'logos' },
         ],
       },
       validation: (rule) => rule.required(),

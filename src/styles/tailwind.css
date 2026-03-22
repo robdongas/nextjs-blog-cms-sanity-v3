@@ -23,6 +23,15 @@
   --shadow-medium: 0 8px 30px rgba(0, 0, 0, 0.12);
 }
 
+@media (prefers-color-scheme: dark) {
+  :root {
+    --color-accent-1: #1a1a1a;
+    --color-accent-2: #2e2e2e;
+    --color-accent-7: #cfcfcf;
+    --color-yellow-100: #3d3520;
+  }
+}
+
 /*
   The default border color has changed to `currentColor` in Tailwind CSS v4,
   so we've added these compatibility styles to make sure everything still
@@ -38,5 +47,15 @@
   ::backdrop,
   ::file-selector-button {
     border-color: var(--color-gray-200, currentColor);
+  }
+
+  @media (prefers-color-scheme: dark) {
+    *,
+    ::after,
+    ::before,
+    ::backdrop,
+    ::file-selector-button {
+      border-color: var(--color-neutral-700, currentColor);
+    }
   }
 }

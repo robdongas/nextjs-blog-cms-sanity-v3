@@ -29,7 +29,8 @@ const gaId = import.meta.env.PUBLIC_GA_ID
     <link rel="shortcut icon" href="/favicon/favicon.ico" />
     <meta name="msapplication-TileColor" content="#000000" />
     <meta name="msapplication-config" content="/favicon/browserconfig.xml" />
-    <meta name="theme-color" content="#000" />
+    <meta name="theme-color" content="#ffffff" media="(prefers-color-scheme: light)" />
+    <meta name="theme-color" content="#0a0a0a" media="(prefers-color-scheme: dark)" />
 
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -49,7 +50,7 @@ const gaId = import.meta.env.PUBLIC_GA_ID
       </>
     )}
   </head>
-  <body class="bg-white text-black antialiased" style="font-family: 'Inclusive Sans', sans-serif;">
+  <body class="bg-white text-black dark:bg-neutral-950 dark:text-white antialiased transition-colors duration-300" style="font-family: 'Inclusive Sans', sans-serif;">
     <div class="min-h-screen">
       <main>
         <slot />

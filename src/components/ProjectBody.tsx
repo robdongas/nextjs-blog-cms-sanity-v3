@@ -41,7 +41,7 @@ export default function ProjectBody({ content }: { content: any }) {
     }, [])
 
     return (
-        <div className="mx-auto max-w-2xl prose">
+        <div className="mx-auto max-w-2xl prose dark:prose-invert">
             <PortableText value={content} components={myPortableTextComponents} />
         </div>
     )

@@ -31,7 +31,7 @@ export default function ProjectPreview({
                             />
                         </a>
                     ) : (
-                        <div style={{ paddingTop: '50%', backgroundColor: '#ddd' }} />
+                        <div className="bg-neutral-300 dark:bg-neutral-700" style={{ paddingTop: '50%' }} />
                     )}
                 </div>
                 <div className='absolute pointer-events-none inset-0 bg-gradient-to-b from-transparent to-black/60 opacity-0 transition-opacity duration-300 group-hover:opacity-100'></div>

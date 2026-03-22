@@ -65,8 +65,8 @@ export default function ClientMarquee({ clients }: ClientMarqueeProps) {
 
             <div className="w-full py-8 overflow-hidden relative mb-8">
                 {/* Edge fade gradients */}
-                <div className="absolute left-0 top-0 w-32 h-full bg-gradient-to-r from-white to-transparent z-10"></div>
-                <div className="absolute right-0 top-0 w-32 h-full bg-gradient-to-l from-white to-transparent z-10"></div>
+                <div className="absolute left-0 top-0 w-32 h-full bg-gradient-to-r from-white dark:from-neutral-950 to-transparent z-10"></div>
+                <div className="absolute right-0 top-0 w-32 h-full bg-gradient-to-l from-white dark:from-neutral-950 to-transparent z-10"></div>
 
                 <div ref={marqueeRef} className="flex whitespace-nowrap">
                     <div ref={contentRef} className="flex justify-between items-center">
